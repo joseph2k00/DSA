@@ -7,15 +7,16 @@ public class insertionSort {
         // Insertion sort algorithm
         for (int i = 1; i < arr.length; i++)
         {
+            int currentElement = arr[i];
             int j = i - 1;
-            while (j >= 0 && arr[j + 1] < arr[j]) 
+
+            while (j >= 0 && arr[j] > currentElement) 
             {
-                // Elements are swapped
-                int swap = arr[j + 1];
                 arr[j + 1] = arr[j];
-                arr[j] = swap;
                 j--;
             }
+
+            arr[j + 1] = currentElement;
         }
 
         // Print the sorted array
