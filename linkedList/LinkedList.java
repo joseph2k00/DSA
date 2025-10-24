@@ -2,12 +2,10 @@ package linkedList;
 
 public class LinkedList {
     Node head;
-    int length;
 
     LinkedList ()
     {
         this.head = null;
-        this.length = 0;
     }
 
     private class Node {
@@ -25,62 +23,105 @@ public class LinkedList {
     {
         Node newNode = new Node(value);
         if (head == null)
-            head = newNode;
-        else
         {
-            Node currentNode = head;
-            while (currentNode.next != null)
-                currentNode = currentNode.next;
-            currentNode.next = newNode;
+            head = newNode;
+            return;
         }
-        this.length++;
+            
+        Node currentNode = head;
+        while (currentNode.next != null)
+            currentNode = currentNode.next;
+        currentNode.next = newNode;
+    }
+
+    public int length()
+    {
+        int length = 0;
+        Node currentNode = head;
+        while (currentNode != null)
+        {
+            length++;
+            currentNode = currentNode.next;
+        }
+        return length;
     }
 
     public void insertAtIndex(int value, int index)
     {
-        if (index < 0)
-            index = this.length + 1 + index;
-
-        if (index <= this.length)
+        Node newNode = new Node(value);
+        
+        if (index == 0 && head == null)
         {
-            Node newNode = new Node(value);
+            head = newNode;
+            return;
+        }
 
-            Node currentNode = head;
-            int currentIndex = 0;
-            while (currentNode != null)
+        if (index == 0)
+        {
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+
+        Node previousNode = head;
+        Node currentNode = head.next;
+        int currentIndex = 1;
+
+        while (currentNode != null)
+        {
+            if (currentIndex == index)
             {
-                if (index == 0)
-                {
-                    newNode.next = head;
-                    head = newNode;
-                    this.length++;
-                    return;
-                }
-                
-                if (currentIndex == index - 1)
-                {
-                    Node nextNode = currentNode.next;
-                    currentNode.next = newNode;
-                    newNode.next = nextNode;
-                    this.length++;
-                    return;
-                }
-                
-                currentNode = currentNode.next;
-                currentIndex++;
+                previousNode.next = newNode;
+                newNode.next = currentNode;
+                return;
             }
 
-            head = newNode;
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+            currentIndex++;
         }
-        else
-        {
-            System.out.println("Error: LinkedList index out of bounds");
-        }
+
+        System.out.println("Linked List index out of bounds");
     }
 
-    public void deleteAtIndex()
+    public void deleteAtIndex(int index)
     {
+        if (head == null)
+        {
+            System.out.println("Empty Linked List");
+            return;
+        }
 
+        if (head.next == null && index == 0) 
+        {
+            head = null;
+            return;
+        }
+
+        if (index == 0) 
+        {
+            head = head.next;
+            return;
+        }
+        
+        Node previousNode = head;
+        Node currentNode = head.next;
+        int currentIndex = 1;
+
+        while (currentNode != null)
+        {
+            if (currentIndex == index)
+            {
+                previousNode.next = currentNode.next;
+                return;
+            }
+
+            previousNode = currentNode;
+            currentNode = currentNode.next;
+            currentIndex++;
+        }
+
+        System.out.println("Linked List index out of bounds");
     }
     
     public void print()
@@ -102,8 +143,7 @@ public class LinkedList {
         list.add(5);
         list.insertAtIndex(0, 0);
         list.insertAtIndex(2, 2);
-        list.insertAtIndex(99, -1);
-        list.insertAtIndex(98, -2);
-        list.print();     
+        list.print();
+        System.out.println("\nLL length = " + list.length());
     }
 }
