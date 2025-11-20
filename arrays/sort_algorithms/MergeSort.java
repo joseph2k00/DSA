@@ -2,18 +2,11 @@ package arrays.sort_algorithms;
 
 public class MergeSort 
 {   
-    /**
-     * Function that performs merge sort algorithm on array
-     * 
-     * @param arr
-     * @return int[]
-     */
-    public static int[] mergeSort (int[] arr)
+    public static void mergeSort(int[] arr)
     {
         // Recursion end case
-        if (arr.length == 1) {
-            return arr;
-        }
+        if (arr.length == 1)
+            return;
 
         int length = arr.length;
         int left = length / 2;      // Array size for left array
@@ -33,11 +26,11 @@ public class MergeSort
         }
 
         // Recursively split left and right array
-        int[] leftMergeSorted = mergeSort(leftArr);
-        int[] rightMergeSorted = mergeSort(rightArr);
+        mergeSort(leftArr);
+        mergeSort(rightArr);
 
         // Sort previously merge-sorted array and return to previous mergeSort function
-        return sortedArray(leftMergeSorted, rightMergeSorted);
+        mergeSortArray(leftArr, rightArr, arr);
     }
 
     /**
@@ -47,11 +40,8 @@ public class MergeSort
      * @param rightArr
      * @return
      */
-    public static int[] sortedArray(int[] leftArr, int[] rightArr)
+    private static void mergeSortArray(int[] leftArr, int[] rightArr, int mergedArray[])
     {
-        // Resultant array declaration
-        int[] mergedArray = new int[leftArr.length + rightArr.length];
-
         // Pick smallest element from each array one by one and place it in mergedArray array
         int i = 0, j = 0, k = 0;
         while (i < leftArr.length && j < rightArr.length)
@@ -68,8 +58,6 @@ public class MergeSort
 
         while (j < rightArr.length)
             mergedArray[k++] = rightArr[j++];
-                
-        return mergedArray;
     }
 
     public static void main(String args[])
@@ -77,7 +65,7 @@ public class MergeSort
         int[] arr = {12, 8, 9, 3, 11, 5, 4};
 
         // Merge sort algorithm
-        arr = mergeSort(arr);
+        mergeSort(arr);
 
         // Print the sorted array
         for (int i = 0; i < arr.length; i++) 
