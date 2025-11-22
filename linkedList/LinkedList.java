@@ -132,6 +132,7 @@ public class LinkedList {
             System.out.print(currentNode.value + (currentNode.next != null ? "->": ""));
             currentNode = currentNode.next;
         }
+        System.out.println();
     }
 
     public void reverseIterative() 
@@ -151,6 +152,27 @@ public class LinkedList {
         this.head = prevNode;
     }
 
+    public void reverseRecursive()
+    {
+        Node currNode = this.head;
+        
+        this.head = reverseRecursiveHelper(currNode, null, null);
+    }
+
+    public Node reverseRecursiveHelper(Node currNode, Node prevNode, Node nextNode)
+    {
+        if (currNode == null)
+            return prevNode;
+        
+        nextNode = currNode.next;
+        currNode.next = prevNode;
+        prevNode = currNode;
+        currNode = nextNode;
+
+        return reverseRecursiveHelper(currNode, prevNode, nextNode);
+    }
+
+
     public static void main(String args[])
     {
         LinkedList list = new LinkedList();
@@ -158,7 +180,9 @@ public class LinkedList {
         list.add(3);
         list.add(4);
         list.add(5);
-        list.reverse();
+        list.reverseIterative();
+        list.print();
+        list.reverseRecursive();
         list.print();
         System.out.println("\nLL length = " + list.length());
     }
