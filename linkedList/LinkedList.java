@@ -134,6 +134,23 @@ public class LinkedList {
         }
     }
 
+    public void reverseIterative() 
+    {
+        Node currentNode = this.head;
+        Node prevNode = null;
+        Node nextNode;
+
+        while (currentNode != null)
+        {
+            nextNode = currentNode.next;
+            currentNode.next = prevNode;
+            prevNode = currentNode;
+            currentNode = nextNode;
+        }
+
+        this.head = prevNode;
+    }
+
     public static void main(String args[])
     {
         LinkedList list = new LinkedList();
@@ -141,8 +158,7 @@ public class LinkedList {
         list.add(3);
         list.add(4);
         list.add(5);
-        list.insertAtIndex(0, 0);
-        list.insertAtIndex(2, 2);
+        list.reverse();
         list.print();
         System.out.println("\nLL length = " + list.length());
     }
