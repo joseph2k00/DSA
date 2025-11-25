@@ -8,3 +8,5 @@
 ###### `1.2.1` Binary Search 
 ## `2` `Linked List`
 #### `2.1` `Linked List Implementation` 
+## `3` `Trees`
+#### `3.1` `Binary Tree Implementation`
