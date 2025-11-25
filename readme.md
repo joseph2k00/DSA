@@ -10,3 +10,4 @@
 #### `2.1` `Linked List Implementation` 
 ## `3` `Trees`
 #### `3.1` `Binary Tree Implementation`
+#### `3.2` `Binary Search Tree Implementation`
